@@ -54,10 +54,24 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
   <div class="container jumbotron">
     <table>
       <tr>
+        <th>Username</th>
+        <th>Employee Number</th>
+        <th>Department</th>
+        <th>Position</th>
+        <th>Gender</th>
+        <th>Email</th>
+        <th>Naiyou</th>
         <th>Options</th>
       </tr>
       <?php foreach ($values as $value) { ?>
         <tr>
+          <td><?= htmlspecialchars($value["username"], ENT_QUOTES, 'UTF-8') ?></td>
+          <td><?= htmlspecialchars($value["employee_number"], ENT_QUOTES, 'UTF-8') ?></td>
+          <td><?= htmlspecialchars($value["department"], ENT_QUOTES, 'UTF-8') ?></td>
+          <td><?= htmlspecialchars($value["position"], ENT_QUOTES, 'UTF-8') ?></td>
+          <td><?= htmlspecialchars($value["gender"], ENT_QUOTES, 'UTF-8') ?></td>
+          <td><?= htmlspecialchars($value["email"], ENT_QUOTES, 'UTF-8') ?></td>
+          <td><?= htmlspecialchars($value["naiyou"], ENT_QUOTES, 'UTF-8') ?></td>
           <td><?= htmlspecialchars($value["options"], ENT_QUOTES, 'UTF-8') ?></td>
         </tr>
       <?php } ?>
@@ -65,6 +79,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
   </div>
 </div>
 <!-- Main[End] -->
+
 
 <script>
   // JSON受け取り

@@ -23,6 +23,12 @@ $naiyou = isset($_POST['naiyou']) ? $_POST['naiyou'] : ''; // POSTデータか�
 
 // 2. DB接続
 try {
+    $pdo = new PDO('mysql:dbname=your_database_name;charset=utf8;host=mysqlxxxx.db.sakura.ne.jp', 'your_user_name', 'your_password');
+} catch (PDOException $e) {
+    exit('DB_CONNECT_ERROR: ' . $e->getMessage());
+}
+
+try {
     $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost', 'root', '');
 } catch (PDOException $e) {
     exit('DB_CONNECT_ERROR: ' . $e->getMessage());
