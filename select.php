@@ -1,0 +1,77 @@
+<?php
+// 1. DB接続
+try {
+  $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost', 'root', '');
+} catch (PDOException $e) {
+  exit('DB_CONNECT: ' . $e->getMessage());
+}
+
+// 2. データ取得SQL
+$sql = "SELECT * FROM gs_an_table_TEST";
+$stmt = $pdo->prepare($sql);
+$status = $stmt->execute();
+
+// 3. データ表示
+if ($status == false) {
+  $error = $stmt->errorInfo();
+  exit("SQL_ERROR: " . $error[2]);
+}
+
+// 全データ取得
+$values = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$json = json_encode($values, JSON_UNESCAPED_UNICODE);
+?>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>フリーアンケート表示</title>
+<link rel="stylesheet" href="css/range.css">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<style>
+  div { padding: 10px; font-size: 16px; }
+  td { border: 1px solid red; }
+</style>
+</head>
+<body id="main">
+<!-- Head[Start] -->
+<header>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.php">データ登録</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- Head[End] -->
+
+<!-- Main[Start] -->
+<div>
+  <div class="container jumbotron">
+    <table>
+      <tr>
+        <th>Options</th>
+      </tr>
+      <?php foreach ($values as $value) { ?>
+        <tr>
+          <td><?= htmlspecialchars($value["options"], ENT_QUOTES, 'UTF-8') ?></td>
+        </tr>
+      <?php } ?>
+    </table>
+  </div>
+</div>
+<!-- Main[End] -->
+
+<script>
+  // JSON受け取り
+  const jsonString = '<?= addslashes($json) ?>';
+  const data = JSON.parse(jsonString);
+  console.log(data);
+</script>
+
+</body>
+</html>
