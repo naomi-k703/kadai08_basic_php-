@@ -33,7 +33,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>名前（フルネーム）:</label>
-                            <input type="text" name="name"><br>
+                            <input type="text" name="username"><br>
                         </div>
                         <div class="form-group">
                             <label>社員番号:</label>

@@ -4,7 +4,7 @@
 var_dump($_POST);  // 送信されたデータを出力
 
 // 1. POSTデータ取得
-$name = isset($_POST["name"]) ? $_POST["name"] : '';
+$username = isset($_POST["username"]) ? $_POST["username"] : '';
 $employee_number = isset($_POST["employee_number"]) ? $_POST["employee_number"] : '';
 $department = isset($_POST["department"]) ? $_POST["department"] : '';
 $position = isset($_POST["position"]) ? $_POST["position"] : '';
@@ -29,10 +29,10 @@ try {
 }
 
 // 3. データ登録SQL作成
-$sql = "INSERT INTO gs_an_table_TEST (name,employee_number,department,position,gender,email,naiyou,options,indate) VALUES (:name,:employee_number,:department,:position,:gender,:email,:naiyou,:options,sysdate());";
+$sql = "INSERT INTO gs_an_table_TEST (username,employee_number,department,position,gender,email,naiyou,options) VALUES (:username,:employee_number,:department,:position,:gender,:email,:naiyou,:options);";
 $stmt = $pdo->prepare($sql);
 
-$stmt->bindValue(':name', $name, PDO::PARAM_STR);
+$stmt->bindValue(':username', $username, PDO::PARAM_STR);
 $stmt->bindValue(':employee_number', $employee_number, PDO::PARAM_STR);
 $stmt->bindValue(':department', $department, PDO::PARAM_STR);
 $stmt->bindValue(':position', $position, PDO::PARAM_STR);
